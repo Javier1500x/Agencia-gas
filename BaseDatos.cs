@@ -5,7 +5,7 @@ namespace SistemaContable
     static class BaseDatos
     {
         public const string Cadena =
-            @"Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;TrustServerCertificate=True;";
+            @"Server=localhost\SQLEXPRESS;Database=AgenciaGas;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public static bool ProbarConexion()
         {
