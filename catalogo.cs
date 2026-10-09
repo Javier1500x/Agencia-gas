@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace SistemaContable
 {
-    public class Catalogo
+    public static class Catalogo
     {
         public static void Menu()
         {
@@ -31,13 +31,13 @@ namespace SistemaContable
                 switch (opcion)
                 {
                     case 1:
-                        ListarCuentas();
+                        Listar();
                         break;
                     case 2:
-                        AgregarCuenta();
+                        Agregar();
                         break;
                     case 3:
-                        ModificarCuenta();
+                        Modificar();
                         break;
                     case 0:
                         break;
@@ -51,7 +51,7 @@ namespace SistemaContable
             } while (opcion != 0);
         }
 
-        public static void ListarCuentas()
+        public static void Listar()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -96,7 +96,7 @@ namespace SistemaContable
             Console.ReadKey();
         }
 
-        public static void AgregarCuenta()
+        public static void Agregar()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -197,7 +197,7 @@ namespace SistemaContable
             Console.ReadKey();
         }
 
-        public static void ModificarCuenta()
+        public static void Modificar()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
