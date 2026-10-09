@@ -12,7 +12,7 @@ namespace SistemaContable
 
             while (!int.TryParse(Console.ReadLine(), out Numero) || Numero < Min || Numero > Max)
             {
-                Console.Write("\nError: Ingrese un numero valido o que este dentro del rando: ");
+                Console.Write("\nError: Ingrese un numero valido o que este dentro del rango: ");
             }
 
             return Numero;
