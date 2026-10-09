@@ -1,4 +1,4 @@
-﻿/* =====================================================
+/* =====================================================
    Sistema contable - Agencia de gas
    Script 01: crea la base, las tablas y el catálogo de cuentas
    Se puede ejecutar varias veces sin que dé error ni duplique datos.
@@ -24,12 +24,12 @@ BEGIN
         Naturaleza     VARCHAR(10)   NOT NULL,
         ActividadFlujo VARCHAR(20)   NOT NULL,
 
-        CONSTRAINT CK_Cuentas_Tipo
-            CHECK (Tipo IN ('Activo', 'Pasivo', 'Capital', 'Ingreso', 'Costo', 'Gasto')),
-        CONSTRAINT CK_Cuentas_Naturaleza
-            CHECK (Naturaleza IN ('Deudora', 'Acreedora')),
-        CONSTRAINT CK_Cuentas_ActividadFlujo
-            CHECK (ActividadFlujo IN ('Operacion', 'Inversion', 'Financiamiento', 'Ninguna'))
+      -- CONSTRAINT CK_Cuentas_Tipo
+        --    CHECK (Tipo IN ('Activo', 'Pasivo', 'Capital', 'Ingreso', 'Costo', 'Gasto')),
+       --CONSTRAINT CK_Cuentas_Naturaleza
+         --   CHECK (Naturaleza IN ('Deudora', 'Acreedora')),
+       --CONSTRAINT CK_Cuentas_ActividadFlujo
+         --   CHECK (ActividadFlujo IN ('Operacion', 'Inversion', 'Financiamiento', 'Ninguna'))
     );
 END
 GO
