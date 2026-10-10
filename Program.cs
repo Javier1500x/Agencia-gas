@@ -31,7 +31,8 @@ namespace SistemaContable
                         break;
 
                     case 2:
-                        Console.WriteLine("Aqui va Registrar asiento");
+                        Asientos.Registrar();
+                        Console.ReadKey();
                         break;
 
                     case 3:
