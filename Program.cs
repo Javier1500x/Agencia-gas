@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Common;
 
 namespace SistemaContable
 {
@@ -26,7 +27,7 @@ namespace SistemaContable
                 switch (Opcion)
                 {
                     case 1:
-                        Console.WriteLine("Aqui va el catalogo de cuentas");
+                        Catalogo.Menu();
                         break;
 
                     case 2:
