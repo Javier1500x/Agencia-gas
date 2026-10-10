@@ -21,7 +21,7 @@ namespace SistemaContable
             while (Continuar)
             {
                 MostrarMenu();
-                int Opcion = LeerOpcion(1, 7);
+                int Opcion = Entrada.LeerEntero("Ingrese que operacion desea realizar (1-7): ", 1, 7);
 
                 switch (Opcion)
                 {
@@ -68,21 +68,7 @@ namespace SistemaContable
             Console.WriteLine("6. Estados Financieros");
             Console.WriteLine("7. Salir");
             Console.WriteLine("=================================");
-        }
-        static int LeerOpcion(int Min, int Max)
-        {
-            int Opcion;
-
-            Console.Write("Ingrese que operacion desea realizar (1-7): ");
-
-            while (!int.TryParse(Console.ReadLine(), out Opcion) || Opcion < Min || Opcion > Max)
-            {
-                Console.Write("\nError: Ingrese un numero valido o que este dentro del rango: ");
-            }
-
-            return Opcion;
-        }
-        
+        } 
     }
     
 }
