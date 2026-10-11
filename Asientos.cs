@@ -102,10 +102,15 @@ namespace SistemaContable
                 Console.WriteLine("Total Debe: " + TotalDebe);
                 Console.WriteLine("Total Haber: " + TotalHaber);
             }
+            else if (AsientosBD.Guardar(Fecha, Descripcion, Lista))
+            {
+                Console.WriteLine("\nAsiento guardado exitosamente");
+            }
             else
             {
-                Console.WriteLine("\nAqui se guarda");
+                Console.WriteLine("\nError al intentar guardar el asiento.");
             }
+          
         }
     }
 }

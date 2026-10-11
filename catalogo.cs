@@ -11,7 +11,6 @@ namespace SistemaContable
             do
             {
                 Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("=========================================");
                 Console.WriteLine("         CATÁLOGO DE CUENTAS             ");
                 Console.WriteLine("=========================================");
@@ -116,7 +115,6 @@ namespace SistemaContable
 
             string nombre = Entrada.LeerTexto("Ingrese el nombre de la cuenta: ");
 
-            // Menú 1: Tipo
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nSeleccione el Tipo de Cuenta:");
             Console.ResetColor();
@@ -138,7 +136,6 @@ namespace SistemaContable
                 _ => "Activo"
             };
 
-            // Menú 2: Naturaleza
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nSeleccione la Naturaleza:");
             Console.ResetColor();
@@ -147,7 +144,6 @@ namespace SistemaContable
             int optNat = Entrada.LeerEntero("Opción (1-2): ", 1, 2);
             string naturaleza = optNat == 1 ? "Deudora" : "Acreedora";
 
-            // Menú 3: Actividad de Flujo
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nSeleccione la Actividad de Flujo:");
             Console.ResetColor();
@@ -165,7 +161,6 @@ namespace SistemaContable
                 _ => "Ninguna"
             };
 
-            // Establecer conexión e insertar
             using (SqlConnection conn = new SqlConnection(BaseDatos.Cadena))
             {
                 try

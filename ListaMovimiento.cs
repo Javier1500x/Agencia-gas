@@ -2,12 +2,12 @@ using System;
 
 namespace SistemaContable
 {
-    class Nodo
+    public class Nodo
     {
         public Movimiento Dato;
         public Nodo Siguiente;
     }
-    class ListaMovimientos
+    public class ListaMovimientos
     {
         public Nodo Cabeza;
         public int Cantidad;

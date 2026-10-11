@@ -2,7 +2,7 @@ using System;
 
 namespace SistemaContable
 {
-    class Movimiento
+    public class Movimiento
     {
         public int CodigoCuenta;
         public decimal Debe;
