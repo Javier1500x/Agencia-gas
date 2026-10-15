@@ -7,5 +7,6 @@ namespace SistemaContable
         public int CodigoCuenta;
         public decimal Debe;
         public decimal Haber;
+        public string Nombre;
     }
 }
