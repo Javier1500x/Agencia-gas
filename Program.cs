@@ -36,7 +36,7 @@ namespace SistemaContable
                         break;
 
                     case 3:
-                        Console.WriteLine("Aqui va El libro Mayor");
+                        LibroDiario.Mostrar();
                         break;
 
                     case 4:
@@ -59,9 +59,9 @@ namespace SistemaContable
         }
         static void MostrarMenu()
         {
-            Console.WriteLine("\n=================================");
-            Console.WriteLine("SISTEMA CONTABLE - AGENCIA DE GAS");
-            Console.WriteLine("=================================");
+            Console.WriteLine("\n================================================");
+            Console.WriteLine("       SISTEMA CONTABLE - AGENCIA DE GAS");
+            Console.WriteLine("================================================");
             Console.WriteLine("1. Catalogo de Cuentas");
             Console.WriteLine("2. Registrar Asiento");
             Console.WriteLine("3. Libro Diario");
@@ -69,7 +69,7 @@ namespace SistemaContable
             Console.WriteLine("5. Balanza de Comprobacion");
             Console.WriteLine("6. Estados Financieros");
             Console.WriteLine("7. Salir");
-            Console.WriteLine("=================================");
+            Console.WriteLine("================================================");
         } 
     }
     
