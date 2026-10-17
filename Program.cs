@@ -40,11 +40,11 @@ namespace SistemaContable
                         break;
 
                     case 4:
-                        Console.WriteLine("Aqui va El libro mayor");
+                        LibroMayor.Mostrar();
                         break;
 
                     case 5:
-                        Console.WriteLine("Aqui va La balansa de comprobacion");
+                        Balanza.Mostrar();
                         break;
 
                     case 6:

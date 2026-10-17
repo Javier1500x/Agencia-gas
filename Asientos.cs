@@ -6,7 +6,7 @@ namespace SistemaContable
 {
     static class Asientos
     {
-        static int LeerCodigoCuenta()
+         public static int LeerCodigoCuenta()
         {
             int Codigo;
 

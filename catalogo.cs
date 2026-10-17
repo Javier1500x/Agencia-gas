@@ -21,7 +21,7 @@ namespace SistemaContable
                 Console.WriteLine("3. Modificar cuenta");
                 Console.WriteLine("0. Volver al menú principal");
                 
-                Console.ForegroundColor = ConsoleColor.Cyan;
+             
                 Console.WriteLine("=========================================");
                 Console.ResetColor();
                 
@@ -53,8 +53,9 @@ namespace SistemaContable
         public static void Listar()
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("--- LISTADO DE CUENTAS ---");
+          Console.WriteLine("================================================================================");
+            Console.WriteLine("                              LISTADO DE CUENTAS ")              ;
+         Console.WriteLine("================================================================================");
             Console.ResetColor();
 
             using (SqlConnection conn = new SqlConnection(BaseDatos.Cadena))
@@ -98,9 +99,10 @@ namespace SistemaContable
         public static void Agregar()
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("--- AGREGAR NUEVA CUENTA ---");
-            Console.ResetColor();
+           Console.WriteLine("===============================================");
+            Console.WriteLine("           AGREGAR NUEVA CUENTA"    )              ;
+            Console.WriteLine("===============================================");
+        
 
             int codigo = Entrada.LeerEntero("Ingrese el código de la cuenta (ej. 1109): ", 1, 99999);
 
