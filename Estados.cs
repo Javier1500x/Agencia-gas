@@ -7,10 +7,14 @@ namespace SistemaContable
     {
         public static void Menu()
         {
+            Console.Clear();
+
             bool continuar = true;
 
             while (continuar)
             {
+                Console.Clear();
+
                 Console.WriteLine("\n===============================================");
                 Console.WriteLine("              ESTADOS FINANCIEROS");
                 Console.WriteLine("===============================================");
@@ -26,21 +30,25 @@ namespace SistemaContable
                 switch (Opcion)
                 {
                     case 1:
+                        Console.Clear();
                         EstadoResultados.Mostrar();
                         Console.ReadKey();
                         break;
 
                     case 2:
+                        Console.Clear();
                         VariacionCapital.Mostrar();
                         Console.ReadKey();
                         break;
 
                     case 3:
+                        Console.Clear();
                         BalanceGeneral.Mostrar();
                         Console.ReadKey();
                         break;
 
                     case 4:
+                        Console.Clear();
                         FlujoEfectivo.Mostrar();
                         Console.ReadKey();
                         break;
