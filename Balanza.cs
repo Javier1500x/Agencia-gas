@@ -26,22 +26,26 @@ namespace SistemaContable
                     SqlCommand Comando = new SqlCommand(Consulta, Conexion);
                     SqlDataReader Lector = Comando.ExecuteReader();
 
-                    Console.WriteLine("\nCodigo | Nombre                | Debe       | Haber      | Saldo");
+                    Console.WriteLine();
+                 
+                    Console.WriteLine("{0,-6} | {1,-21} | {2,10} | {3,10} | {4,10}", "Codigo", "Nombre", "Debe", "Haber", "Saldo");
                     Console.WriteLine(new string('-', 75));
 
                     while (Lector.Read())
                     {
                         decimal Debe = Convert.ToDecimal(Lector["TotalDebe"]);
                         decimal Haber = Convert.ToDecimal(Lector["TotalHaber"]);
+                        decimal Saldo = Debe - Haber;
 
                         SumaDebe = SumaDebe + Debe;
                         SumaHaber = SumaHaber + Haber;
 
-                        Console.WriteLine(Lector["Codigo"] + " | " +
-                                          Lector["Nombre"].ToString().PadRight(21) + " | " +
-                                          Debe.ToString("0.00") + " | " +
-                                          Haber.ToString("0.00") + " | " +
-                                          (Debe - Haber).ToString("0.00"));
+                        Console.WriteLine("{0,-6} | {1,-21} | {2,10} | {3,10} | {4,10}", 
+                            Lector["Codigo"], 
+                            Lector["Nombre"], 
+                            Debe.ToString("0.00"), 
+                            Haber.ToString("0.00"), 
+                            Saldo.ToString("0.00"));
                     }
                     Lector.Close();
                 }
@@ -75,5 +79,3 @@ namespace SistemaContable
         }
     }
 }
-
-
