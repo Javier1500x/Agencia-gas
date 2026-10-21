@@ -48,7 +48,7 @@ namespace SistemaContable
                         break;
 
                     case 6:
-                        Console.WriteLine("Aqui van los estados financieros");
+                        Estados.Menu();
                         break;
 
                     case 7:
