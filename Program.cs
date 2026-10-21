@@ -7,6 +7,8 @@ namespace SistemaContable
     {
         static void Main(string[] args)
         {
+            Console.Clear();
+            
             if (SistemaContable.BaseDatos.ProbarConexion())
             {
                 Console.WriteLine("Conexión exitosa");
@@ -21,6 +23,8 @@ namespace SistemaContable
 
             while (Continuar)
             {
+                Console.Clear();
+
                 MostrarMenu();
                 int Opcion = Entrada.LeerEntero("Ingrese que operacion desea realizar (1-7): ", 1, 7);
 
