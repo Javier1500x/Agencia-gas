@@ -6,7 +6,7 @@ namespace SistemaContable
 {
     static class Asientos
     {
-         public static int LeerCodigoCuenta()
+        public static int LeerCodigoCuenta()
         {
             int Codigo;
 
@@ -19,6 +19,7 @@ namespace SistemaContable
 
             return Codigo;
         }
+
         static decimal LeerMontoPositivo()
         {
             decimal Monto = Entrada.LeerMonto("\nMonto: ");
@@ -31,12 +32,24 @@ namespace SistemaContable
 
             return Monto;
         }
+
         static Movimiento PedirMovimiento()
         {
             Movimiento nuevo = new Movimiento();
 
+            Console.WriteLine("\n-----------------------------------------------");
+            Console.WriteLine("               MOVIMIENTO CONTABLE");
+            Console.WriteLine("-----------------------------------------------");
+
             nuevo.CodigoCuenta = LeerCodigoCuenta();
-            int lado = Entrada.LeerEntero("\n1. Debe / 2. Haber: ", 1, 2);
+
+            Console.WriteLine("\n-----------------------------------------------");
+            Console.WriteLine("  1. Debe");
+            Console.WriteLine("  2. Haber");
+            Console.WriteLine("-----------------------------------------------");
+
+            int lado = Entrada.LeerEntero("\nSeleccione una opcion: ", 1, 2);
+
             decimal Monto = LeerMontoPositivo();
 
             if (lado == 1)
@@ -50,6 +63,7 @@ namespace SistemaContable
 
             return nuevo;
         }
+
         static decimal SumarDebe(ListaMovimientos Lista)
         {
             decimal Total = 0;
@@ -63,6 +77,7 @@ namespace SistemaContable
 
             return Total;
         }
+
         static decimal SumarHaber(ListaMovimientos Lista)
         {
             decimal Total = 0;
@@ -76,41 +91,80 @@ namespace SistemaContable
 
             return Total;
         }
+
         public static void Registrar()
         {
+            Console.Clear();
+
+            Console.WriteLine("===============================================");
+            Console.WriteLine("|             REGISTRO DE ASIENTOS            |");
+            Console.WriteLine("===============================================");
+
             DateTime Fecha = Entrada.LeerFecha("\nFecha (dd/mm/aaaa): ");
+
             string Descripcion = Entrada.LeerTexto("\nDescripcion: ");
+
             ListaMovimientos Lista = new ListaMovimientos();
+
             int Otro = 1;
 
             while (Otro == 1)
             {
                 Lista.Agregar(PedirMovimiento());
-                Otro = Entrada.LeerEntero("\nAgregar Otro Movimiento? 1. Si / 2. No: ", 1, 2);
-            } 
+
+                Console.WriteLine("\n-----------------------------------------------");
+                Console.WriteLine("  1. Agregar otro movimiento");
+                Console.WriteLine("  2. Finalizar movimientos");
+                Console.WriteLine("-----------------------------------------------");
+
+                Otro = Entrada.LeerEntero("\nSeleccione una opcion: ", 1, 2);
+            }
 
             decimal TotalDebe = SumarDebe(Lista);
             decimal TotalHaber = SumarHaber(Lista);
 
+            Console.WriteLine("\n===============================================");
+            Console.WriteLine("|              RESUMEN DEL ASIENTO            |");
+            Console.WriteLine("===============================================");
+
             if (Lista.Cantidad < 2)
             {
-                Console.WriteLine("\nError: Se necesitan al menos 2 movimientos.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n-----------------------------------------------");
+                Console.WriteLine("Se necesitan al menos 2 movimientos.");
+                Console.WriteLine("-----------------------------------------------");
+                Console.ResetColor();
             }
-                else if (TotalDebe != TotalHaber)
+            else if (TotalDebe != TotalHaber)
             {
-                Console.WriteLine("\nError: El asiento no cuadra.");
-                Console.WriteLine("Total Debe: " + TotalDebe);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n-----------------------------------------------");
+                Console.WriteLine("       EL ASIENTO NO ESTA CUADRADO");
+                Console.WriteLine("-----------------------------------------------");
+                Console.ResetColor();
+
+                Console.WriteLine("Total Debe:  " + TotalDebe);
                 Console.WriteLine("Total Haber: " + TotalHaber);
+
+                Console.WriteLine("-----------------------------------------------");
             }
             else if (AsientosBD.Guardar(Fecha, Descripcion, Lista))
             {
-                Console.WriteLine("\nAsiento guardado exitosamente");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n-----------------------------------------------");
+                Console.WriteLine("       ASIENTO GUARDADO EXITOSAMENTE");
+                Console.WriteLine("-----------------------------------------------");
+                Console.ResetColor();
             }
             else
             {
-                Console.WriteLine("\nError al intentar guardar el asiento.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n-----------------------------------------------");
+                Console.WriteLine("     ERROR AL GUARDAR EL ASIENTO");
+                Console.WriteLine("-----------------------------------------------");
+                Console.ResetColor();
             }
-          
         }
     }
 }
+

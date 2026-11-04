@@ -1,3 +1,4 @@
+
 using System;
 using Microsoft.Data.SqlClient;
 
@@ -11,35 +12,37 @@ namespace SistemaContable
             do
             {
                 Console.Clear();
-                Console.WriteLine("=========================================");
-                Console.WriteLine("         CATÁLOGO DE CUENTAS             ");
-                Console.WriteLine("=========================================");
-                Console.ResetColor();
-                
-                Console.WriteLine("1. Listar cuentas");
-                Console.WriteLine("2. Agregar cuenta");
-                Console.WriteLine("3. Modificar cuenta");
-                Console.WriteLine("0. Volver al menú principal");
-                
-             
-                Console.WriteLine("=========================================");
-                Console.ResetColor();
-                
-                opcion = Entrada.LeerEntero("Seleccione una opción: ", 0, 3);
+
+                Console.WriteLine("===============================================");
+                Console.WriteLine("|             CATÁLOGO DE CUENTAS             |");
+                Console.WriteLine("===============================================");
+                Console.WriteLine("|  1. Listar cuentas                          |");
+                Console.WriteLine("|  2. Agregar cuenta                          |");
+                Console.WriteLine("|  3. Modificar cuenta                        |");
+                Console.WriteLine("|  0. Volver al menú principal                |");
+                Console.WriteLine("|                                             |");
+                Console.WriteLine("===============================================");
+
+                opcion = Entrada.LeerEntero(
+                    "\nSeleccione una opción: ", 0, 3);
 
                 switch (opcion)
                 {
                     case 1:
                         Listar();
                         break;
+
                     case 2:
                         Agregar();
                         break;
+
                     case 3:
                         Modificar();
                         break;
+
                     case 0:
                         break;
+
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Opción inválida.");
@@ -47,15 +50,17 @@ namespace SistemaContable
                         Console.ReadKey();
                         break;
                 }
+
             } while (opcion != 0);
         }
 
         public static void Listar()
         {
             Console.Clear();
-          Console.WriteLine("================================================================================");
-            Console.WriteLine("                              LISTADO DE CUENTAS ")              ;
-         Console.WriteLine("================================================================================");
+
+            Console.WriteLine("================================================================================");
+            Console.WriteLine("                              LISTADO DE CUENTAS");
+            Console.WriteLine("================================================================================");
             Console.ResetColor();
 
             using (SqlConnection conn = new SqlConnection(BaseDatos.Cadena))
@@ -63,13 +68,19 @@ namespace SistemaContable
                 try
                 {
                     conn.Open();
+
                     string query = "SELECT Codigo, Nombre, Tipo, Naturaleza, ActividadFlujo FROM Cuentas ORDER BY Codigo";
+
                     SqlCommand cmd = new SqlCommand(query, conn);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("{0,-8} | {1,-25} | {2,-10} | {3,-10} | {4,-15}", "Código", "Nombre", "Tipo", "Naturaleza", "Flujo");
+
+                    Console.WriteLine("{0,-8} | {1,-25} | {2,-10} | {3,-10} | {4,-15}",
+                        "Código", "Nombre", "Tipo", "Naturaleza", "Flujo");
+
                     Console.WriteLine(new string('-', 78));
+
                     Console.ResetColor();
 
                     while (reader.Read())
@@ -80,8 +91,10 @@ namespace SistemaContable
                         string naturaleza = reader.GetString(3);
                         string flujo = reader.GetString(4);
 
-                        Console.WriteLine("{0,-8} | {1,-25} | {2,-10} | {3,-10} | {4,-15}", codigo, nombre, tipo, naturaleza, flujo);
+                        Console.WriteLine("{0,-8} | {1,-25} | {2,-10} | {3,-10} | {4,-15}",
+                            codigo, nombre, tipo, naturaleza, flujo);
                     }
+
                     reader.Close();
                 }
                 catch (Exception ex)
@@ -99,34 +112,43 @@ namespace SistemaContable
         public static void Agregar()
         {
             Console.Clear();
-           Console.WriteLine("===============================================");
-            Console.WriteLine("           AGREGAR NUEVA CUENTA"    )              ;
-            Console.WriteLine("===============================================");
-        
 
-            int codigo = Entrada.LeerEntero("Ingrese el código de la cuenta (ej. 1109): ", 1, 99999);
+            Console.WriteLine("===============================================");
+            Console.WriteLine("|                AGREGAR CUENTA               |");
+            Console.WriteLine("===============================================");
+
+            int codigo = Entrada.LeerEntero(
+                "\nCódigo de cuenta (1-99999): ", 1, 99999);
 
             if (ExisteCuenta(codigo))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Error: Ya existe una cuenta registrada con ese código.");
+                Console.WriteLine("\n-----------------------------------------------");
+                Console.WriteLine("La cuenta ya existe.");
+                Console.WriteLine("-----------------------------------------------");
                 Console.ResetColor();
                 Console.ReadKey();
                 return;
             }
 
-            string nombre = Entrada.LeerTexto("Ingrese el nombre de la cuenta: ");
+            string nombre = Entrada.LeerTexto(
+                "\nNombre de la cuenta: ");
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nSeleccione el Tipo de Cuenta:");
-            Console.ResetColor();
-            Console.WriteLine("1. Activo");
-            Console.WriteLine("2. Pasivo");
-            Console.WriteLine("3. Capital");
-            Console.WriteLine("4. Ingreso");
-            Console.WriteLine("5. Costo");
-            Console.WriteLine("6. Gasto");
+            Console.WriteLine("\n-----------------------------------------------");
+            Console.WriteLine("                 TIPO DE CUENTA");
+            Console.WriteLine("-----------------------------------------------");
+
+            Console.WriteLine("  1. Activo");
+            Console.WriteLine("  2. Pasivo");
+            Console.WriteLine("  3. Capital");
+            Console.WriteLine("  4. Ingreso");
+            Console.WriteLine("  5. Costo");
+            Console.WriteLine("  6. Gasto");
+
+            Console.WriteLine("-----------------------------------------------");
+
             int optTipo = Entrada.LeerEntero("Opción (1-6): ", 1, 6);
+
             string tipo = optTipo switch
             {
                 1 => "Activo",
@@ -138,22 +160,36 @@ namespace SistemaContable
                 _ => "Activo"
             };
 
+            Console.WriteLine("\n-----------------------------------------------");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nSeleccione la Naturaleza:");
+            Console.WriteLine("             NATURALEZA DE LA CUENTA");
             Console.ResetColor();
-            Console.WriteLine("1. Deudora");
-            Console.WriteLine("2. Acreedora");
+            Console.WriteLine("-----------------------------------------------");
+
+            Console.WriteLine("  1. Deudora");
+            Console.WriteLine("  2. Acreedora");
+
+            Console.WriteLine("-----------------------------------------------");
+
             int optNat = Entrada.LeerEntero("Opción (1-2): ", 1, 2);
+
             string naturaleza = optNat == 1 ? "Deudora" : "Acreedora";
 
+            Console.WriteLine("\n-----------------------------------------------");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nSeleccione la Actividad de Flujo:");
+            Console.WriteLine("               ACTIVIDAD DE FLUJO");
             Console.ResetColor();
-            Console.WriteLine("1. Operacion");
-            Console.WriteLine("2. Inversion");
-            Console.WriteLine("3. Financiamiento");
-            Console.WriteLine("4. Ninguna");
+            Console.WriteLine("-----------------------------------------------");
+
+            Console.WriteLine("  1. Operacion");
+            Console.WriteLine("  2. Inversion");
+            Console.WriteLine("  3. Financiamiento");
+            Console.WriteLine("  4. Ninguna");
+
+            Console.WriteLine("-----------------------------------------------");
+
             int optFlujo = Entrada.LeerEntero("Opción (1-4): ", 1, 4);
+
             string actividadFlujo = optFlujo switch
             {
                 1 => "Operacion",
@@ -168,8 +204,11 @@ namespace SistemaContable
                 try
                 {
                     conn.Open();
+
                     string query = "INSERT INTO Cuentas (Codigo, Nombre, Tipo, Naturaleza, ActividadFlujo) VALUES (@Codigo, @Nombre, @Tipo, @Naturaleza, @ActividadFlujo)";
+
                     SqlCommand cmd = new SqlCommand(query, conn);
+
                     cmd.Parameters.AddWithValue("@Codigo", codigo);
                     cmd.Parameters.AddWithValue("@Nombre", nombre);
                     cmd.Parameters.AddWithValue("@Tipo", tipo);
@@ -177,15 +216,19 @@ namespace SistemaContable
                     cmd.Parameters.AddWithValue("@ActividadFlujo", actividadFlujo);
 
                     cmd.ExecuteNonQuery();
-                    
+
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\n¡Cuenta agregada exitosamente!");
+                    Console.WriteLine("\n===============================================");
+                    Console.WriteLine("|          CUENTA AGREGADA CON ÉXITO          |");
+                    Console.WriteLine("===============================================");
                     Console.ResetColor();
                 }
                 catch (Exception ex)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\n-----------------------------------------------");
                     Console.WriteLine("Error al agregar la cuenta: " + ex.Message);
+                    Console.WriteLine("-----------------------------------------------");
                     Console.ResetColor();
                 }
             }
@@ -197,33 +240,43 @@ namespace SistemaContable
         public static void Modificar()
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("--- MODIFICAR CUENTA ---");
-            Console.ResetColor();
 
-            int codigo = Entrada.LeerEntero("Ingrese el código de la cuenta que desea modificar: ", 1, 99999);
+            Console.WriteLine("===============================================");
+            Console.WriteLine("|               MODIFICAR CUENTA              |");
+            Console.WriteLine("===============================================");
+
+            int codigo = Entrada.LeerEntero(
+                "\nCódigo de la cuenta a modificar: ", 1, 99999);
 
             if (!ExisteCuenta(codigo))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Error: No existe ninguna cuenta con ese código.");
+                Console.WriteLine("\n-----------------------------------------------");
+                Console.WriteLine("No existe una cuenta con ese código.");
+                Console.WriteLine("-----------------------------------------------");
                 Console.ResetColor();
                 Console.ReadKey();
                 return;
             }
 
-            string nuevoNombre = Entrada.LeerTexto("Ingrese el nuevo nombre de la cuenta: ");
+            string nuevoNombre = Entrada.LeerTexto(
+                "\nNuevo nombre de la cuenta: ");
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nSeleccione el nuevo Tipo de Cuenta:");
-            Console.ResetColor();
-            Console.WriteLine("1. Activo");
-            Console.WriteLine("2. Pasivo");
-            Console.WriteLine("3. Capital");
-            Console.WriteLine("4. Ingreso");
-            Console.WriteLine("5. Costo");
-            Console.WriteLine("6. Gasto");
+            Console.WriteLine("\n-----------------------------------------------");
+            Console.WriteLine("              NUEVO TIPO DE CUENTA");
+            Console.WriteLine("-----------------------------------------------");
+
+            Console.WriteLine("  1. Activo");
+            Console.WriteLine("  2. Pasivo");
+            Console.WriteLine("  3. Capital");
+            Console.WriteLine("  4. Ingreso");
+            Console.WriteLine("  5. Costo");
+            Console.WriteLine("  6. Gasto");
+
+            Console.WriteLine("-----------------------------------------------");
+
             int optTipo = Entrada.LeerEntero("Opción (1-6): ", 1, 6);
+
             string nuevoTipo = optTipo switch
             {
                 1 => "Activo",
@@ -240,22 +293,29 @@ namespace SistemaContable
                 try
                 {
                     conn.Open();
+
                     string query = "UPDATE Cuentas SET Nombre = @Nombre, Tipo = @Tipo WHERE Codigo = @Codigo";
+
                     SqlCommand cmd = new SqlCommand(query, conn);
+
                     cmd.Parameters.AddWithValue("@Codigo", codigo);
                     cmd.Parameters.AddWithValue("@Nombre", nuevoNombre);
                     cmd.Parameters.AddWithValue("@Tipo", nuevoTipo);
 
                     cmd.ExecuteNonQuery();
-                    
+
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\n¡Cuenta modificada exitosamente!");
+                    Console.WriteLine("\n===============================================");
+                    Console.WriteLine("|         CUENTA MODIFICADA CON ÉXITO         |");
+                    Console.WriteLine("===============================================");
                     Console.ResetColor();
                 }
                 catch (Exception ex)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\n-----------------------------------------------");
                     Console.WriteLine("Error al modificar la cuenta: " + ex.Message);
+                    Console.WriteLine("-----------------------------------------------");
                     Console.ResetColor();
                 }
             }
@@ -273,11 +333,14 @@ namespace SistemaContable
                 try
                 {
                     conn.Open();
+
                     string query = "SELECT COUNT(1) FROM Cuentas WHERE Codigo = @Codigo";
+
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@Codigo", codigo);
 
                     int count = Convert.ToInt32(cmd.ExecuteScalar());
+
                     if (count > 0)
                     {
                         existe = true;
