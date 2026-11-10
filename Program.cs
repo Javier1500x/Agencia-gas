@@ -67,7 +67,7 @@ namespace SistemaContable
         {
             Console.WriteLine("===============================================");
             Console.WriteLine("|              SISTEMA CONTABLE               |");
-            Console.WriteLine("|               AGENCIA DE GAS                |");
+            Console.WriteLine("|               AGENCIA DE GAS Rojas          |");
             Console.WriteLine("===============================================");
             Console.WriteLine("|  [1] Catalogo de Cuentas                    |");
             Console.WriteLine("|  [2] Registrar Asiento                      |");
